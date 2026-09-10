@@ -1,14 +1,30 @@
 {
-  "name": "proyectos-de-prueba",
+  "name": "playwright-saucedemo-automation",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "End-to-end and API test automation for SauceDemo (Swag Labs) built with Playwright, TypeScript and the Page Object Model.",
+  "author": "Cristhofer Espinoza",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen https://www.saucedemo.com",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "test-automation",
+    "e2e",
+    "page-object-model",
+    "qa"
+  ],
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "@types/node": "^26.4.1"
+    "@types/node": "^26.4.1",
+    "typescript": "^5.9.3"
   }
 }

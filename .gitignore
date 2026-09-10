@@ -1,8 +1,21 @@
+# Dependencies
+node_modules/
 
 # Playwright
-node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Playwright MCP scratch output
+/.playwright-mcp/
+
+# Editors / OS
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

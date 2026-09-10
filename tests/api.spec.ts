@@ -1,28 +1,29 @@
+// Spec: specs/saucedemo-test-plan.md - Section 5 (API)
+// Public sample API: https://reqres.in/
+
 import { test, expect } from '@playwright/test';
 
-test.describe('Pruebas de API', () => {
+const BASE_URL = 'https://reqres.in/api';
 
-  // GET: obtener un usuario y validar la respuesta
-  test('GET usuario devuelve 200 y los datos correctos', async ({ request }) => {
-    const response = await request.get('https://reqres.in/api/users/2');
-    // Validamos el código de estado (contrato básico)
+test.describe('API - reqres.in', () => {
+  test('GET /users/:id returns 200 and a well-formed user', async ({ request }) => {
+    const response = await request.get(`${BASE_URL}/users/2`);
     expect(response.status()).toBe(200);
+
     const body = await response.json();
-    // Validamos la estructura de la respuesta
-    expect(body.data).toHaveProperty('id', 2);
+    expect(body.data).toMatchObject({ id: 2 });
     expect(body.data).toHaveProperty('email');
     expect(body.data.email).toContain('@');
   });
 
-  // POST: crear un usuario y validar la respuesta
-  test('POST crea un usuario y devuelve 201', async ({ request }) => {
-    const response = await request.post('https://reqres.in/api/users', {
-      data: { name: 'Cristhofer', job: 'QA Automation' }
-    });
+  test('POST /users creates a resource and returns 201', async ({ request }) => {
+    const payload = { name: 'Cristhofer', job: 'QA Automation Engineer' };
+    const response = await request.post(`${BASE_URL}/users`, { data: payload });
     expect(response.status()).toBe(201);
-    const body = await response.json();
-    expect(body).toHaveProperty('name', 'Cristhofer');
-    expect(body).toHaveProperty('id');
-  });
 
+    const body = await response.json();
+    expect(body).toMatchObject(payload);
+    expect(body).toHaveProperty('id');
+    expect(body).toHaveProperty('createdAt');
+  });
 });
